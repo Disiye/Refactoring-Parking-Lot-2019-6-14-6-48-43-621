@@ -166,22 +166,22 @@ public class ParkingBoyTest {
     void should_return_new_car_in_no2_parking_lot_when_no1_parking_lot_is_full() throws Exception {
 
         //Given
+        Car newCar = new Car();
         ParkingBoy parkingBoy = new ParkingBoy();
         parkingBoy.addParkingLot(new ParkingLot());
         parkingBoy.addParkingLot(new ParkingLot());
         Customer customer = new Customer();
         customer.setFetchCar(parkingBoy);
         customer.setPark(parkingBoy);
-        customer.setCar(new Car());
+        customer.setCar(newCar);
 
         //When
-        for (int i = 0; i < 10; i++) {
-            Car car = new Car();
-            parkingBoy.parkCar(car);
+        for(int i = 0;i < 10;i++){
+            parkingBoy.parkCar(new Car());
         }
-        Ticket ticket = parkingBoy.parkCar(new Car());
+        Ticket ticket=parkingBoy.parkCar(newCar);
 
         //Then
-        assertEquals(customer.getCar(), parkingBoy.fetchCar(ticket));
+        assertEquals(customer.getCar(),parkingBoy.fetchCar(ticket));
     }
 }
